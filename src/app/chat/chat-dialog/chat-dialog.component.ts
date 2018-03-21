@@ -1,21 +1,24 @@
 import { Component, OnInit } from '@angular/core';
-import { ChatService, Message } from "../chat.service";
-import { AngularFireDatabase } from "angularfire2/database";
-import { Observable } from "rxjs/Observable";
+import { ChatService, Message } from '../chat.service';
+import { AngularFireDatabase } from 'angularfire2/database';
+import { Observable } from 'rxjs/Observable';
+import { AngularFireAuth } from 'angularfire2/auth';
 import 'rxjs/add/operator/scan';
+import {DataService} from '../../data.service';
 
 @Component({
   selector: 'chat-dialog',
   templateUrl: './chat-dialog.component.html',
   styleUrls: ['./chat-dialog.component.css']
 })
-export class ChatDialogComponent implements OnInit {
 
+export class ChatDialogComponent implements OnInit {
+  authenticated: boolean;
   messages: Observable<Message[]>;
   formValue: string;
   users: any[];
 
-  constructor(private chat: ChatService, db: AngularFireDatabase) {
+  constructor(private chat: ChatService, db: AngularFireDatabase, af: AngularFireAuth, private data: DataService) {
     db.list('/users').valueChanges().subscribe(users => {
       this.users = users;
       console.log(this.users);
@@ -23,14 +26,17 @@ export class ChatDialogComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.data.authenticated.subscribe(authenticated => this.authenticated = authenticated);
+    console.log(this.authenticated);
     this.messages = this.chat.conversation.asObservable()
       .scan((acc, val) => acc.concat(val));
     this.chat.talk();
   }
 
   sendMessage() {
-    if (this.formValue && this.formValue.length > 0)
+    if (this.formValue && this.formValue.length > 0) {
       this.chat.converse(this.formValue);
+    }
     this.formValue = '';
   }
 

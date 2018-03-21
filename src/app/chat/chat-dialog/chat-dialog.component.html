@@ -12,15 +12,24 @@
 
   </ng-container>
 
-  <label for="nameField">Votre message</label>
+  <div class="send" *ngIf="authenticated">
+    <label>Votre message</label>
 
-  <input [(ngModel)]="formValue" (keyup.enter)="sendMessage()" type="text"><br>
+    <input [(ngModel)]="formValue" (keyup.enter)="sendMessage()" type="text"><br>
 
-  <button (click)="sendMessage()">Envoyer</button>
+    <button (click)="sendMessage()">Envoyer</button>
+  </div>
 
-  <ul>
+  <div class="not-logged-in" *ngIf="!authenticated">
+    <p>Vous devez être connecté pour utiliser le chat</p>
+  </div>
+
+  <!--<ul>
     <li *ngFor="let user of users">
       {{ user.name }}
     </li>
-  </ul>
+  </ul>-->
+
+
+
 </div>

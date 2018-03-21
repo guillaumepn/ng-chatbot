@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { environment } from "../../environments/environment";
+import { environment } from '../../environments/environment';
 
 import { ApiAiClient } from 'api-ai-javascript';
 
-import { Observable } from "rxjs/Observable";
-import { BehaviorSubject } from "rxjs/BehaviorSubject";
+import { Observable } from 'rxjs/Observable';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 
 export class Message {
@@ -33,6 +33,13 @@ export class ChatService {
     // ICI on mettra le code qui GET en bdd, etc, et on complétera
     // le message de réponse du bot ci-dessous dans le return avec
     // les bonnes infos
+    fetch("https://chatbot-djingo-pets.herokuapp.com/webhook").then(function (res) {
+      console.log(res);
+    }).then(function (data) {
+      console.log(data);
+    }).catch(function (err) {
+      console.log(err);
+    });
 
     return this.client.textRequest(msg)
       .then(res => {

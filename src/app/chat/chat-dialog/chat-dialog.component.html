@@ -6,10 +6,7 @@
       <p [innerHTML]="firstHTML" class="first-icons"></p>
     </div>
 
-    <div class="welcome message from">
-      <p>Voulez-vous configurer la fiche de votre animal ?</p>
-    </div>
-
+    <div class="history">
     <ng-container *ngFor="let message of messages | async">
 
       <div class="message" [ngClass]="{
@@ -21,6 +18,7 @@
       </div>
 
     </ng-container>
+    </div>
   </div>
 
 </div>

@@ -11,7 +11,7 @@ export class AppComponent {
   title = 'app';
   users: any[];
   homescreen: any;
-  headerDisplay = 'block';
+  headerDisplay = 'flex';
 
   constructor() {
     this.homescreen = document.querySelector('.homescreen');

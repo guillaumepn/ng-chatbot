@@ -27,6 +27,11 @@ export class ChatService {
   usersRef: any;
   authenticated: boolean;
   conversation = new BehaviorSubject<Message[]>([]);
+  veto_name = '';
+  veto_adresse = '';
+  veto_telephone = '';
+  veto_mail = '';
+  dataToSave: any;
 
   constructor(public af: AngularFireAuth, private router: Router, private data: DataService) {
     this.usersRef = this.ref.child('users');
@@ -50,13 +55,14 @@ export class ChatService {
     // les bonnes infos
 
     return this.client.textRequest(msg)
+
       .then(res => {
         console.log(res.result);
 
         console.log(firebase.auth().currentUser);
         this.user = firebase.auth().currentUser;
 
-        let speech = res.result.fulfillment.speech;
+          let speech = res.result.fulfillment.speech;
         let addHtml = '';
         this.result = res.result;
 
@@ -72,20 +78,27 @@ export class ChatService {
         }
 
         if (res.result.action === 'veto_name') {
-          // insere en bdd nom veto
-          const userRef = this.usersRef.push({
-            email:  this.user.email,
-            veto_name: this.result.parameters.nom
-          });
+
+            this.dataToSave.email = this.user.email;
+            this.veto_name = this.result.parameters.nom;
+            this.dataToSave.veto_name = this.veto_name;
         }
         if (res.result.action === 'veto_adresse') {
-          // insere en bdd adresse veto
+            this.veto_adresse = this.result.parameters.adresse;
+            this.dataToSave.veto_adresse = this.veto_adresse;
         }
         if (res.result.action === 'veto_telephone') {
-          // insere en bdd telephone veto
+            this.veto_telephone = this.result.parameters.telephone;
+            this.dataToSave.veto_telephone = this.veto_telephone;
         }
         if (res.result.action === 'veto_mail') {
-          // insere en bdd mail veto
+            this.veto_mail = this.result.parameters.mail;
+            this.dataToSave.veto_mail = this.veto_mail;
+            let dataJson = JSON.stringify(this.dataToSave);
+
+            const userRef = this.usersRef.update({
+                veto: dataJson
+            });
         }
         if (res.result.action === 'veto_call') {
           // insere en bdd mail veto
@@ -110,7 +123,7 @@ export class ChatService {
               console.log(firebase.auth().currentUser);
               this.user = firebase.auth().currentUser;
               addHtml =`
-                <img src="https://maps.googleapis.com/maps/api/staticmap?center=48.8488288,2.2814991&zoom=12&size=400x400&maptype=terrain&key=AIzaSyAXV6EXF3AcfOzifiykh5Z4tYGGT6GxcEU">
+                <img src="https://maps.googleapis.com/maps/api/staticmap?center=48.8488288,2.2814991&zoom=16&markers=red%7Clabel:A%7C48.8488288,2.2814991&size=400x400&maptype=terrain&key=AIzaSyAXV6EXF3AcfOzifiykh5Z4tYGGT6GxcEU">
               `;
 
           }

@@ -52,6 +52,7 @@ export class ChatService {
     return this.client.textRequest(msg)
       .then(res => {
         console.log(res.result);
+
         console.log(firebase.auth().currentUser);
         this.user = firebase.auth().currentUser;
 
@@ -105,6 +106,14 @@ export class ChatService {
         if (res.result.action === 'profilAnimal_vaccin') {
           // insere en bdd animal vaccin
         }
+          if (res.result.action === 'found_animal') {
+              console.log(firebase.auth().currentUser);
+              this.user = firebase.auth().currentUser;
+              addHtml =`
+                <img src="https://maps.googleapis.com/maps/api/staticmap?center=48.8488288,2.2814991&zoom=12&size=400x400&maptype=terrain&key=AIzaSyB9BS4l6ZXwVEUmZFwYxs1QjPVXPMD7KmM">
+              `;
+
+          }
         if (res.result.action === 'command_croquette') {
           let croquette = this.result.parameters.marque;
           croquette = croquette.replace(/ /g, '+');

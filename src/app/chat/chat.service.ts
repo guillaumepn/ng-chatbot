@@ -22,10 +22,16 @@ export class ChatService {
   readonly client = new ApiAiClient({ accessToken: this.token });
 
   user: any;
+  result: any;
+  ref = firebase.app().database().ref();
+  usersRef: any;
   authenticated: boolean;
   conversation = new BehaviorSubject<Message[]>([]);
 
-  constructor(public af: AngularFireAuth, private router: Router, private data: DataService) { }
+  constructor(public af: AngularFireAuth, private router: Router, private data: DataService) {
+    this.usersRef = this.ref.child('users');
+    console.log(this.usersRef);
+  }
 
   // Ajoute le message à la conversation
   update(msg: Message) {
@@ -46,12 +52,15 @@ export class ChatService {
     return this.client.textRequest(msg)
       .then(res => {
         console.log(res.result);
+
+        console.log(firebase.auth().currentUser);
+        this.user = firebase.auth().currentUser;
+
         let speech = res.result.fulfillment.speech;
         let addHtml = '';
+        this.result = res.result;
 
         if (res.result.action === 'user.profile') {
-          console.log(firebase.auth().currentUser);
-          this.user = firebase.auth().currentUser;
           speech = `Votre profil est :`;
           addHtml = `
             <ul>
@@ -62,51 +71,41 @@ export class ChatService {
           `;
         }
 
-          if (res.result.action === 'veto_name') {
-              console.log(firebase.auth().currentUser);
-              this.user = firebase.auth().currentUser;
-              // insere en bdd nom veto
-          }
-          if (res.result.action === 'veto_adresse') {
-              console.log(firebase.auth().currentUser);
-              this.user = firebase.auth().currentUser;
-              // insere en bdd adresse veto
-          }
-          if (res.result.action === 'veto_telephone') {
-              console.log(firebase.auth().currentUser);
-              this.user = firebase.auth().currentUser;
-              // insere en bdd telephone veto
-          }
-          if (res.result.action === 'veto_mail') {
-              console.log(firebase.auth().currentUser);
-              this.user = firebase.auth().currentUser;
-              // insere en bdd mail veto
-          }
-          if (res.result.action === 'profilAnimal_type') {
-              console.log(firebase.auth().currentUser);
-              this.user = firebase.auth().currentUser;
-              // insere en bdd animal type
-          }
-          if (res.result.action === 'profilAnimal_name') {
-              console.log(firebase.auth().currentUser);
-              this.user = firebase.auth().currentUser;
-              // insere en bdd animal name
-          }
-          if (res.result.action === 'profilAnimal_poids') {
-              console.log(firebase.auth().currentUser);
-              this.user = firebase.auth().currentUser;
-              // insere en bdd animal poids
-          }
-          if (res.result.action === 'profilAnimal_date') {
-              console.log(firebase.auth().currentUser);
-              this.user = firebase.auth().currentUser;
-              // insere en bdd animal date
-          }
-          if (res.result.action === 'profilAnimal_vaccin') {
-              console.log(firebase.auth().currentUser);
-              this.user = firebase.auth().currentUser;
-              // insere en bdd animal vaccin
-          }
+        if (res.result.action === 'veto_name') {
+          // insere en bdd nom veto
+          const userRef = this.usersRef.push({
+            email:  this.user.email,
+            veto_name: this.result.parameters.nom
+          });
+        }
+        if (res.result.action === 'veto_adresse') {
+          // insere en bdd adresse veto
+        }
+        if (res.result.action === 'veto_telephone') {
+          // insere en bdd telephone veto
+        }
+        if (res.result.action === 'veto_mail') {
+          // insere en bdd mail veto
+        }
+        if (res.result.action === 'veto_call') {
+          // insere en bdd mail veto
+          window.open('tel:+33682760863');
+        }
+        if (res.result.action === 'profilAnimal_type') {
+          // insere en bdd animal type
+        }
+        if (res.result.action === 'profilAnimal_name') {
+          // insere en bdd animal name
+        }
+        if (res.result.action === 'profilAnimal_poids') {
+          // insere en bdd animal poids
+        }
+        if (res.result.action === 'profilAnimal_date') {
+          // insere en bdd animal date
+        }
+        if (res.result.action === 'profilAnimal_vaccin') {
+          // insere en bdd animal vaccin
+        }
           if (res.result.action === 'found_animal') {
               console.log(firebase.auth().currentUser);
               this.user = firebase.auth().currentUser;
@@ -114,19 +113,15 @@ export class ChatService {
                 <img src="https://maps.googleapis.com/maps/api/staticmap?center=48.8488288,2.2814991&zoom=12&size=400x400&maptype=terrain&key=AIzaSyB9BS4l6ZXwVEUmZFwYxs1QjPVXPMD7KmM">
               `;
 
-
-
           }
-          if (res.result.action === 'command_croquette') {
-              console.log(firebase.auth().currentUser);
-              this.user = firebase.auth().currentUser;
-              let croquette = res.result.parameters.marque;
-              croquette = croquette.replace(/ /g, "+");
-              let href = 'https://www.animalis.com/catalogsearch/result/index/?q='+croquette;
-              addHtml = `
+        if (res.result.action === 'command_croquette') {
+          let croquette = this.result.parameters.marque;
+          croquette = croquette.replace(/ /g, '+');
+          const href = 'https://www.animalis.com/catalogsearch/result/index/?q=' + croquette;
+          addHtml = `
             <a target="_blank" href=${href}><img src="../../assets/images/croquette.jpg"></a>
           `;
-          }
+        }
 
         const botMessage = new Message(speech, 'bot', addHtml);
         this.update(botMessage);

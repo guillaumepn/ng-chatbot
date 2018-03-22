@@ -16,6 +16,7 @@
 <body>
   <app-root></app-root>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
   <script>
     // Initialize Firebase
@@ -28,6 +29,20 @@
       messagingSenderId: "522232257116"
     };
     firebase.initializeApp(config);
+  </script>
+
+  <script>
+    $(document).ready(function() {
+      // console.log($('.localiser-link'));
+      $('.localiser-link').click(function() {
+        $('.conversation.history').append(`
+           <div class="message from">
+      <p>Votre animal se trouve ici :</p>
+      <div><img src="https://maps.googleapis.com/maps/api/staticmap?center=48.8488288,2.2814991&zoom=16&markers=red%7Clabel:A%7C48.8488288,2.2814991&size=400x400&maptype=terrain&key=AIzaSyAXV6EXF3AcfOzifiykh5Z4tYGGT6GxcEU"></div>
+    </div>
+        `);
+      });
+    });
   </script>
 </body>
 </html>

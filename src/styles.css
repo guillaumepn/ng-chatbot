@@ -82,6 +82,7 @@
 .send input {
   width: 92%;
   margin: 16px 4%;
+  padding-right: 40px;
 }
 
 .send button {

@@ -22,6 +22,7 @@ export class ChatService {
   readonly client = new ApiAiClient({ accessToken: this.token });
 
   user: any;
+  result: any;
   ref = firebase.app().database().ref();
   usersRef: any;
   authenticated: boolean;
@@ -56,6 +57,7 @@ export class ChatService {
 
         let speech = res.result.fulfillment.speech;
         let addHtml = '';
+        this.result = res.result;
 
         if (res.result.action === 'user.profile') {
           speech = `Votre profil est :`;
@@ -72,7 +74,7 @@ export class ChatService {
           // insere en bdd nom veto
           const userRef = this.usersRef.push({
             email:  this.user.email,
-            veto_name: res.result.parameters.nom
+            veto_name: this.result.parameters.nom
           });
         }
         if (res.result.action === 'veto_adresse') {
@@ -104,7 +106,7 @@ export class ChatService {
           // insere en bdd animal vaccin
         }
         if (res.result.action === 'command_croquette') {
-          let croquette = res.result.parameters.marque;
+          let croquette = this.result.parameters.marque;
           croquette = croquette.replace(/ /g, '+');
           const href = 'https://www.animalis.com/catalogsearch/result/index/?q=' + croquette;
           addHtml = `

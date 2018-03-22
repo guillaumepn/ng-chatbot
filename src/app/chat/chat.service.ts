@@ -123,8 +123,8 @@ export class ChatService {
               console.log(firebase.auth().currentUser);
               this.user = firebase.auth().currentUser;
               addHtml =`
-                <img src="https://maps.googleapis.com/maps/api/staticmap?center=48.8488288,2.2814991&zoom=16&markers=red%7Clabel:A%7C48.8488288,2.2814991&size=400x400&maptype=terrain&key=AIzaSyAXV6EXF3AcfOzifiykh5Z4tYGGT6GxcEU">
-              `;
+             <img src="https://maps.googleapis.com/maps/api/staticmap?center=48.8488288,2.2814991&zoom=16&markers=red%7Clabel:A%7C48.8488288,2.2814991&size=400x400&maptype=terrain&key=AIzaSyAXV6EXF3AcfOzifiykh5Z4tYGGT6GxcEU">
+           `;
 
           }
         if (res.result.action === 'command_croquette') {

@@ -63,10 +63,10 @@
 }
 
 .connexion .white-round {
-  position: absolute;
+  position: fixed;
   width: 100%;
   left: 0;
-  height: 200px;
+      height: 32%;
   background-image: url("assets/images/connexion-bottom.png");
   background-size: 100%;
   bottom: 0;

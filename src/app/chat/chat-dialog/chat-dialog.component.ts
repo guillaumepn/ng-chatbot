@@ -17,6 +17,7 @@ export class ChatDialogComponent implements OnInit {
   messages: Observable<Message[]>;
   formValue: string;
   users: any[];
+  firstHTML: string;
 
   constructor(private chat: ChatService, db: AngularFireDatabase, af: AngularFireAuth, private data: DataService) {
     db.list('/users').valueChanges().subscribe(users => {
@@ -26,6 +27,10 @@ export class ChatDialogComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.firstHTML = `
+    <a href=""><img src="assets/images/sante.png" class="welcome sante"></a> <a href=""><img src="assets/images/localiser.png" class="welcome localiser"></a> <a href=""><img src="assets/images/shopping.png" class="welcome shopping"></a>
+    `;
+
     this.data.authenticated.subscribe(authenticated => this.authenticated = authenticated);
     console.log(this.authenticated);
     this.messages = this.chat.conversation.asObservable()

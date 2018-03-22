@@ -31,6 +31,13 @@ export class ChatService {
   veto_adresse = '';
   veto_telephone = '';
   veto_mail = '';
+
+  animalType = '';
+  animalName = '';
+  animalPoids = '';
+  animalDate = '';
+  animalVaccin = '';
+  animalSave: any = {};
   dataToSave: any = {};
 
   constructor(public af: AngularFireAuth, private router: Router, private data: DataService) {
@@ -104,21 +111,36 @@ export class ChatService {
           // insere en bdd mail veto
           window.open('tel:+33682760863');
         }
+
         if (res.result.action === 'profilAnimal_type') {
-          // insere en bdd animal type
+            this.animalSave.email = this.user.email;
+            this.animalType = this.result.parameters.typeAnimal;
+            this.animalSave.animalType = this.animalType;
         }
         if (res.result.action === 'profilAnimal_name') {
-          // insere en bdd animal name
+            this.animalName = this.result.parameters.nom;
+            this.animalSave.animalName = this.animalName;
         }
         if (res.result.action === 'profilAnimal_poids') {
-          // insere en bdd animal poids
+            this.animalPoids = this.result.parameters.number;
+            this.animalSave.animalPoids = this.animalPoids;
         }
         if (res.result.action === 'profilAnimal_date') {
-          // insere en bdd animal date
+            this.animalDate = this.result.parameters.dateAnimal;
+            this.animalSave.animalDate = this.animalDate;
         }
         if (res.result.action === 'profilAnimal_vaccin') {
-          // insere en bdd animal vaccin
+
+            this.animalVaccin = this.result.parameters.vaccin;
+            this.animalSave.animalVaccin = this.animalVaccin;
+            let dataJson = JSON.stringify(this.animalSave);
+
+            const userRef = this.usersRef.push({
+                animal: dataJson
+            });
+
         }
+
           if (res.result.action === 'found_animal') {
               console.log(firebase.auth().currentUser);
               this.user = firebase.auth().currentUser;

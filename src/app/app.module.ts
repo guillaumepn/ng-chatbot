@@ -24,6 +24,7 @@ const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'chat', component: ChatDialogComponent },
+  { path: 'profile', component: ProfileComponent },
   // {
   //   path: 'heroes',
   //   component: HeroListComponent,

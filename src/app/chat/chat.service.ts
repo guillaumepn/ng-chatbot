@@ -31,14 +31,14 @@ export class ChatService {
   veto_adresse = '';
   veto_telephone = '';
   veto_mail = '';
-  dataToSave = {};
 
   animalType = '';
   animalName = '';
   animalPoids = '';
   animalDate = '';
   animalVaccin = '';
-  animalSave = {};
+  animalSave: any = {};
+  dataToSave: any = {};
 
   constructor(public af: AngularFireAuth, private router: Router, private data: DataService) {
     this.usersRef = this.ref.child('users');

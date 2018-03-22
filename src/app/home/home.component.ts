@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {DataService} from '../data.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'home',
@@ -10,7 +11,7 @@ export class HomeComponent implements OnInit {
 
   authenticated: boolean;
 
-  constructor(private data: DataService) { }
+  constructor(private data: DataService, public router: Router) {}
 
   ngOnInit() {
     this.data.authenticated.subscribe(authenticated => this.authenticated = authenticated);

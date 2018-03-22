@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { AngularFireAuth } from 'angularfire2/auth';
 import 'rxjs/add/operator/scan';
 import {DataService} from '../../data.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'chat-dialog',
@@ -17,8 +18,9 @@ export class ChatDialogComponent implements OnInit {
   messages: Observable<Message[]>;
   formValue: string;
   users: any[];
+  firstHTML: string;
 
-  constructor(private chat: ChatService, db: AngularFireDatabase, af: AngularFireAuth, private data: DataService) {
+  constructor(private chat: ChatService, db: AngularFireDatabase, af: AngularFireAuth, private data: DataService, public router: Router) {
     db.list('/users').valueChanges().subscribe(users => {
       this.users = users;
       console.log(this.users);
@@ -26,6 +28,10 @@ export class ChatDialogComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.firstHTML = `
+    <a target="_blank" href=""><img src="assets/images/sante.png" class="welcome sante"></a> <a target="_blank" href=""><img src="assets/images/localiser.png" class="welcome localiser"></a> <a target="_blank" href="https://www.animalis.com"><img src="assets/images/shopping.png" class="welcome shopping"></a>
+    `;
+
     this.data.authenticated.subscribe(authenticated => this.authenticated = authenticated);
     console.log(this.authenticated);
     this.messages = this.chat.conversation.asObservable()

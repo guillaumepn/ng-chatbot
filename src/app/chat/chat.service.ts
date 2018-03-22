@@ -62,6 +62,57 @@ export class ChatService {
           `;
         }
 
+          if (res.result.action === 'veto_name') {
+              console.log(firebase.auth().currentUser);
+              this.user = firebase.auth().currentUser;
+              // insere en bdd nom veto
+          }
+          if (res.result.action === 'veto_adresse') {
+              console.log(firebase.auth().currentUser);
+              this.user = firebase.auth().currentUser;
+              // insere en bdd adresse veto
+          }
+          if (res.result.action === 'veto_telephone') {
+              console.log(firebase.auth().currentUser);
+              this.user = firebase.auth().currentUser;
+              // insere en bdd telephone veto
+          }
+          if (res.result.action === 'veto_mail') {
+              console.log(firebase.auth().currentUser);
+              this.user = firebase.auth().currentUser;
+              // insere en bdd mail veto
+          }
+          if (res.result.action === 'profilAnimal_type') {
+              console.log(firebase.auth().currentUser);
+              this.user = firebase.auth().currentUser;
+              // insere en bdd animal type
+          }
+          if (res.result.action === 'profilAnimal_name') {
+              console.log(firebase.auth().currentUser);
+              this.user = firebase.auth().currentUser;
+              // insere en bdd animal name
+          }
+          if (res.result.action === 'profilAnimal_poids') {
+              console.log(firebase.auth().currentUser);
+              this.user = firebase.auth().currentUser;
+              // insere en bdd animal poids
+          }
+          if (res.result.action === 'profilAnimal_date') {
+              console.log(firebase.auth().currentUser);
+              this.user = firebase.auth().currentUser;
+              // insere en bdd animal date
+          }
+          if (res.result.action === 'profilAnimal_vaccin') {
+              console.log(firebase.auth().currentUser);
+              this.user = firebase.auth().currentUser;
+              // insere en bdd animal vaccin
+          }
+          if (res.result.action === 'config_croquette_marque') {
+              console.log(firebase.auth().currentUser);
+              this.user = firebase.auth().currentUser;
+              // insere en bdd croquette favorite
+          }
+
         const botMessage = new Message(speech, 'bot', addHtml);
         this.update(botMessage);
       });

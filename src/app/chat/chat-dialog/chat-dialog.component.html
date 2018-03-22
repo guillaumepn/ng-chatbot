@@ -1,28 +1,30 @@
-<div class="container">
+<div class="container chat">
 
-  <div class="welcome icons message from">
-    <p>Bonjour ! Je suis votre assistant Djingo Pets. Que puis-je faire pour vous aujourd'hui ?</p>
-    <p [innerHTML]="firstHTML" class="first-icons"></p>
-  </div>
+  <div class="conversation">
+    <div class="welcome icons message from">
+      <p>Bonjour ! Je suis votre assistant Djingo Pets. Que puis-je faire pour vous aujourd'hui ?</p>
+      <p [innerHTML]="firstHTML" class="first-icons"></p>
+    </div>
 
-  <div class="welcome message from">
-    <p>Voulez-vous configurer la fiche de votre animal ?</p>
-  </div>
+    <div class="welcome message from">
+      <p>Voulez-vous configurer la fiche de votre animal ?</p>
+    </div>
 
-  <ng-container *ngFor="let message of messages | async">
+    <ng-container *ngFor="let message of messages | async">
 
-    <div class="message" [ngClass]="{
+      <div class="message" [ngClass]="{
     'from': message.sentBy === 'bot',
     'to': message.sentBy === 'user'
    }">
-      {{ message.content }}
-      <div [innerHTML]="message.addHtml"></div>
-    </div>
+        {{ message.content }}
+        <div [innerHTML]="message.addHtml"></div>
+      </div>
 
-  </ng-container>
-
-  <div class="send">
-    <input [(ngModel)]="formValue" (keyup.enter)="sendMessage()" type="text" placeholder="Autre chose ?" class="chat-input">  <button (click)="sendMessage()"></button>
+    </ng-container>
   </div>
 
+</div>
+
+<div class="send">
+  <input [(ngModel)]="formValue" (keyup.enter)="sendMessage()" type="text" placeholder="Autre chose ?" class="chat-input">  <button (click)="sendMessage()"></button>
 </div>

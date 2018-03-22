@@ -10,7 +10,14 @@
 
 .container {
   background: linear-gradient(#fff, #EDEDED);
-  min-height: 100vh;
+  min-height: 80vh;
+}
+
+.container.chat {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-bottom: 70px;
 }
 
 .message {
@@ -65,10 +72,22 @@
   border-color: #EF781A !important;
 }
 
+.send {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: #EDEDED;
+}
+
+.send input {
+  width: 92%;
+  margin: 16px 4%;
+}
+
 .send button {
   position: absolute;
   bottom: 5px;
-  right: 10px;
+  right: 30px;
   background: transparent url("assets/images/send.png");
   background-size: 40% 70%;
   background-repeat: no-repeat;

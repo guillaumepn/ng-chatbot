@@ -30,6 +30,8 @@ export class ChatService {
   // Ajoute le message à la conversation
   update(msg: Message) {
     this.conversation.next([msg]);
+    const conversationBlock = document.querySelector('body');
+    conversationBlock.scrollTop = conversationBlock.scrollHeight;
   }
 
   // Envoie et reçoit des messages via DialogFlow
@@ -43,7 +45,7 @@ export class ChatService {
 
     return this.client.textRequest(msg)
       .then(res => {
-        console.log(res.result.action);
+        console.log(res.result);
 
         let speech = res.result.fulfillment.speech;
 

@@ -110,7 +110,7 @@ export class ChatService {
               console.log(firebase.auth().currentUser);
               this.user = firebase.auth().currentUser;
               addHtml =`
-                <img src="https://maps.googleapis.com/maps/api/staticmap?center=48.8488288,2.2814991&zoom=12&size=400x400&maptype=terrain&key=AIzaSyB9BS4l6ZXwVEUmZFwYxs1QjPVXPMD7KmM">
+                <img src="https://maps.googleapis.com/maps/api/staticmap?center=48.8488288,2.2814991&zoom=12&size=400x400&maptype=terrain&key=AIzaSyAXV6EXF3AcfOzifiykh5Z4tYGGT6GxcEU">
               `;
 
           }

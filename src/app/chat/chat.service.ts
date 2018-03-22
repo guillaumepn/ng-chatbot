@@ -48,7 +48,6 @@ export class ChatService {
         console.log(res.result);
 
         let speech = res.result.fulfillment.speech;
-
         let addHtml = '';
 
         if (res.result.action === 'user.profile') {
@@ -63,6 +62,62 @@ export class ChatService {
             </ul>
           `;
         }
+
+          if (res.result.action === 'veto_name') {
+              console.log(firebase.auth().currentUser);
+              this.user = firebase.auth().currentUser;
+              // insere en bdd nom veto
+          }
+          if (res.result.action === 'veto_adresse') {
+              console.log(firebase.auth().currentUser);
+              this.user = firebase.auth().currentUser;
+              // insere en bdd adresse veto
+          }
+          if (res.result.action === 'veto_telephone') {
+              console.log(firebase.auth().currentUser);
+              this.user = firebase.auth().currentUser;
+              // insere en bdd telephone veto
+          }
+          if (res.result.action === 'veto_mail') {
+              console.log(firebase.auth().currentUser);
+              this.user = firebase.auth().currentUser;
+              // insere en bdd mail veto
+          }
+          if (res.result.action === 'profilAnimal_type') {
+              console.log(firebase.auth().currentUser);
+              this.user = firebase.auth().currentUser;
+              // insere en bdd animal type
+          }
+          if (res.result.action === 'profilAnimal_name') {
+              console.log(firebase.auth().currentUser);
+              this.user = firebase.auth().currentUser;
+              // insere en bdd animal name
+          }
+          if (res.result.action === 'profilAnimal_poids') {
+              console.log(firebase.auth().currentUser);
+              this.user = firebase.auth().currentUser;
+              // insere en bdd animal poids
+          }
+          if (res.result.action === 'profilAnimal_date') {
+              console.log(firebase.auth().currentUser);
+              this.user = firebase.auth().currentUser;
+              // insere en bdd animal date
+          }
+          if (res.result.action === 'profilAnimal_vaccin') {
+              console.log(firebase.auth().currentUser);
+              this.user = firebase.auth().currentUser;
+              // insere en bdd animal vaccin
+          }
+          if (res.result.action === 'command_croquette') {
+              console.log(firebase.auth().currentUser);
+              this.user = firebase.auth().currentUser;
+              let croquette = res.result.parameters.marque;
+              croquette = croquette.replace(/ /g, "+");
+              let href = "https://www.animalis.com/catalogsearch/result/index/?q="+croquette;
+              addHtml = `
+            <a target="_blank" href=${href}><img src="../../assets/images/croquette.jpg"></a>
+          `;
+          }
 
         const botMessage = new Message(speech, 'bot', addHtml);
         this.update(botMessage);

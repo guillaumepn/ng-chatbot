@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>NgChatbot</title>
+  <title>Djingo Pets</title>
   <base href="/">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -34,6 +34,9 @@
   <script>
     $(document).ready(function() {
       // console.log($('.localiser-link'));
+      $('.call-veto').click(function() {
+        window.open('tel:+33682760863');
+      });
       $('.localiser-link').click(function() {
         $('.history').prepend(`
            <div class="message from">

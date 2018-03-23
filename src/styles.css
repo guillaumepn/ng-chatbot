@@ -181,3 +181,82 @@
   background-position: 100%;
   border: none;
 }
+
+.profile {
+  position: relative;
+}
+
+.profile .cross {
+      position: absolute;
+    display: block;
+    width: 20px;
+    right: 20px;
+}
+
+.profile .top .profil-header {
+      display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-left: 30px;
+}
+
+.profile .top .profil-header .animal-image {
+      width: 30%;
+}
+
+.profile .top .profil-header .animal-name {
+        margin-left: 30px;
+    font-size: 26px;
+    color: #EF781A;
+}
+
+.profile .top .profil-info {
+  margin: 30px 0 30px 30px;
+}
+
+.animal-info {
+      display: inline-block;
+    font-size: 20px;
+    font-weight: 500;
+    margin-right: 15px;
+}
+
+.animal-info .label {
+  color: #EF781A;
+}
+
+.profile .bottom {
+      padding: 30px;
+    border-top: 2px solid #EF781A;
+}
+
+.profile .bottom h2 {
+    text-transform: uppercase;
+    font-size: 22px;
+    color: #EF781A;
+    text-align: center;
+    letter-spacing: 0.5px;
+}
+
+.veto-info {
+      display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.veto-info .left {
+      font-size: 18px;
+}
+
+.veto-info .left .orange {
+  color: #EF781A;
+}
+
+.veto-info .right {
+  text-align: center;
+}
+
+.veto-info .right img {
+      width: 50%;
+    border-radius: 20px;
+}

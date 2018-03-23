@@ -28,7 +28,7 @@ export class ChatDialogComponent implements OnInit {
 
   ngOnInit() {
     this.firstHTML = `
-    <a target="_blank" href=""><img src="assets/images/sante.png" class="welcome sante"></a> <a class="localiser-link"><img src="assets/images/localiser.png" class="welcome localiser"></a> <a target="_blank" href="https://www.animalis.com"><img src="assets/images/shopping.png" class="welcome shopping"></a>
+    <a target="_blank" class="call-veto"><img src="assets/images/sante.png" class="welcome sante"></a> <a class="localiser-link"><img src="assets/images/localiser.png" class="welcome localiser"></a> <a target="_blank" href="https://www.animalis.com"><img src="assets/images/shopping.png" class="welcome shopping"></a>
     `;
 
     this.data.authenticated.subscribe(authenticated => this.authenticated = authenticated);
